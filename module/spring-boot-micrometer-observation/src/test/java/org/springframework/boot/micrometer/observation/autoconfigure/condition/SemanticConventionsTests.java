@@ -54,4 +54,12 @@ class SemanticConventionsTests {
 		assertThat(SemanticConventions.OPEN_TELEMETRY.isActive(environment)).isTrue();
 	}
 
+	@Test
+	void dashedMatch() {
+		MockEnvironment environment = new MockEnvironment();
+		TestPropertyValues.of("management.observations.conventions=open-telemetry").applyTo(environment);
+		assertThat(SemanticConventions.MICROMETER.isActive(environment)).isFalse();
+		assertThat(SemanticConventions.OPEN_TELEMETRY.isActive(environment)).isTrue();
+	}
+
 }
